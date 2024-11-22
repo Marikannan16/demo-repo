@@ -104,7 +104,7 @@ const UserList = () => {
     return (
         <div className='h-full w-full p-5 shadow-lg'>
             <div className="flex flex-col justify-center gap-2 items-start lg:flex-row mb-6 lg:items-center lg:justify-between">
-                <h2 className='text-xl font-bold'>User Management({filterData.length})</h2>
+                <h2 className='text-xl font-bold '>User Management({filterData.length})</h2>
                 <div className="flex items-center justify-center gap-2 lg:gap-4">
                     <div className='relative'><button className="bg-primary text-white rounded-full p-2 cursor-pointer" onClick={() => setDownMenu(!DownMenu)}><LuDownload size={20} /></button>
                         {DownMenu && <div className='absolute mt-5 lg:right-0 left-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>

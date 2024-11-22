@@ -9,7 +9,7 @@ const activities = [
   {
     SNO:2,
     state: 'Tamilnadu',
-    branch: 'Anna nagar',
+    branch: 'Anna Nagar',
     activity: 'Trade License - The Activity renewal must be complied',
     date: '12-09-2024',
   },

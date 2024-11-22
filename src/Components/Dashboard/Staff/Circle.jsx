@@ -4,7 +4,7 @@ import CircularProgressBar from './CircularProgressBar';
 const Circle = ({ complied, notComplied, partiallyComplied, overdue }) => {
     return (
       <div className="border border-selectbg shadow-md mt-5 px-4 pb-4 rounded lg:px-8 md:px-6 sm:px-4">
-      <h6 className="mb-4 mt-4">Status of Activities</h6>
+      <h6 className="mb-4 mt-4 font-bold">Status of Activities</h6>
       <div className="flex flex-wrap justify-between items-center space-y-5 lg:space-y-0">
           <div className="w-full lg:w-auto flex-1 text-center">
               <div className='mt-3'>

@@ -24,7 +24,7 @@ const CustomLegend = (props) => {
 const Curve = ({ chartData, title }) => {
     return (
         <div className='curve-container border border-bordergray mt-5 p-4 rounded'>
-            <h5 className='mt-4 ps-2 mb-4'>{title}</h5>
+            <h5 className='mt-4 ps-2 mb-4 font-bold'>Compliance Status for the period April 2024 to August 2024</h5>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>
                     <XAxis dataKey="name" axisLine={false} tickLine={false} />

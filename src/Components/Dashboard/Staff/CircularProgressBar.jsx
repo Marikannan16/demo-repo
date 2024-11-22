@@ -16,7 +16,7 @@ const CircularProgressBar = ({ value, label, color }) => {
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center ">
           <span>{label}</span>
-          <span className=" font-semibold">{`${value}%`}</span>
+          <span className=" font-bold">{`${value}%`}</span>
         </div>
       </div>
     </div>

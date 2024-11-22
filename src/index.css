@@ -22,22 +22,23 @@
     src:url('./fonts/popins/Poppins-Light.ttf') format('truetype');
 }   
 
-body{
-    @apply font-pop;
-}
 
-*{
-    text-decoration: none;
-    
-}
+
+
 
 a:link,a:hover,a:active,a:focus,a:visited{
-    @apply no-underline text-black;
+    color: black;
+    text-decoration: none;
+}
+
+Link{
+    @apply text-black no-underline;
 }
 
 *{
     scrollbar-width: thin; 
     scrollbar-color: #f2f0f0 #ffffff; 
+    @apply font-pop
     
     /* scroll-padding: 10px; */
 }
