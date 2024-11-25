@@ -20,16 +20,16 @@ const ActionMenu = () => {
             </button>
 
             {isOpen && (
-                <div className=" absolute right-3 top-0 flex font-medium px-2 bg-white shadow-md  ">
+                <div className=" absolute right-3 bottom-0.5 flex font-medium px-2  ">
                     <div className=" px-1 w-20 bg-gray-300 rounded-lg  ">
-                        <div className="flex gap-2 py-1 hover:bg-gray-200 " onClick={()=>optionClick("UPDATE")}>
-                        <HiOutlinePencil size={15}/>  <button>Update</button>
+                        <div className="flex gap-2 py-1 hover:bg-gray-200 " onClick={()=>optionClick("Edit")}>
+                        <HiOutlinePencil size={15}/>  <button>Edit</button>
+                        </div>
+                        <div className="flex gap-2 py-1 hover:bg-gray-200" onClick={()=>optionClick("Delete")}>
+                            <RiDeleteBinLine size={15} /><button>Delete</button> 
                         </div>
                         <div className="flex gap-2 py-1 hover:bg-gray-200" onClick={()=>optionClick("View")}>
                             <FiEye size={15} /> <button>View</button>
-                        </div>
-                        <div className="flex gap-2 py-1 hover:bg-gray-200" onClick={()=>optionClick()}>
-                            <RiDeleteBinLine size={15} /><button>Delete</button> 
                         </div>
                     </div>
                 </div>

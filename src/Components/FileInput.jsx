@@ -22,7 +22,7 @@ const FileInput = ({ imageLabel, onImageChange, imageSection }) => {
                     onChange={onImageChange}
                 />
             </label>
-            <p className="mt-4 text-lg font-semibold">{imageLabel}</p>
+            <p className="mt-4 text-lg font-semibold">{imageLabel}<span className="text-red-600 ms-1">*</span></p>
         </div>
 
     )

@@ -38,7 +38,7 @@ Link{
 *{
     scrollbar-width: thin; 
     scrollbar-color: #f2f0f0 #ffffff; 
-    @apply font-pop
+    @apply font-pop ;
     
     /* scroll-padding: 10px; */
 }

@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import TextInput from "../../Components/TextInput";
 import SelectInput from "../../Components/SelectInput";
 import Button from "../../Components/Button";
-import { GoUpload } from "react-icons/go";
-// import pdf from '../../Images/pdf.webp'
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { FaAngleLeft, FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CheckedSelect from "../../Components/CheckedSelect";
 import Swal from 'sweetalert2';
-import edit from '../../Images/edit.png'
-import done from '../../Images/done.png'
+
 const CreateCompliance = () => {
   const navigate = useNavigate();
   const [fileName, setFileName] = useState('')
@@ -67,36 +62,36 @@ const CreateCompliance = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-        title: 'Save',
-        text: 'Do you Want to Save the Compliance',
-        imageUrl: "/src/Images/done.png",
-        imageHeight: 100,
-        imageHeight: 100,
-        showCancelButton: true,
-        iconColor: "#d7b95f",
-        confirmButtonColor: "#d7b95f",
-        confirmButtonText: "Ok",
-      }).then((result)=>{
-        if (result.isConfirmed){
-          navigate('/compliancelist')
-          setCompliance({
-            natureOfCompliance: "",
-            activity: "",
-            typeOfAct: "",
-            applicationLaborAct: "",
-            dueDate: "",
-            section: "",
-            remarks: "",
-            nameOfForm: "",
-            state: "",
-            applicability: "",
-            frequencyOfCompliance: "",
-            priorityType: "",
-            documentPdf: null,
-          });
-          setFileName('')
-        }
-      })
+      title: 'Save',
+      text: 'Do you Want to Save the Compliance',
+      imageUrl: "/src/Images/done.png",
+      imageHeight: 100,
+      imageHeight: 100,
+      showCancelButton: true,
+      iconColor: "#d7b95f",
+      confirmButtonColor: "#d7b95f",
+      confirmButtonText: "Ok",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/compliancelist')
+        setCompliance({
+          natureOfCompliance: "",
+          activity: "",
+          typeOfAct: "",
+          applicationLaborAct: "",
+          dueDate: "",
+          section: "",
+          remarks: "",
+          nameOfForm: "",
+          state: "",
+          applicability: "",
+          frequencyOfCompliance: "",
+          priorityType: "",
+          documentPdf: null,
+        });
+        setFileName('')
+      }
+    })
     // Swal.fire({
     //   title: 'Save',
     //   text: 'Do you Want to Save the Compliance',
@@ -157,7 +152,9 @@ const CreateCompliance = () => {
         <h2 className="text-xl font-bold">Create compliance</h2>
         <Link to="/compliancelist">
           <button className="w-36 py-1.5 bg-primary print:bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
-            <FaAngleLeft />
+            <svg className="h-3 w-3" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.06 8L5 7.06L1.94667 4L5 0.94L4.06 8.21774e-08L0.0599996 4L4.06 8Z" fill="white" />
+            </svg>
             <span>Back to List</span>
           </button>
         </Link>
@@ -238,11 +235,15 @@ const CreateCompliance = () => {
               >
                 {compliance.documentPdf ? (
                   <span>
-                    <IoDocumentTextOutline size={22} />
+                    <svg className=" h-6 w-6" viewBox="0 0 25 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.2977 1.35156V7.57378C15.2977 7.98634 15.4616 8.38201 15.7533 8.67373C16.0451 8.96545 16.4407 9.12934 16.8533 9.12934H23.0755M15.2977 1.35156H4.40884C3.58372 1.35156 2.7924 1.67934 2.20895 2.26279C1.62551 2.84623 1.29773 3.63756 1.29773 4.46267V26.2405C1.29773 27.0656 1.62551 27.8569 2.20895 28.4403C2.7924 29.0238 3.58372 29.3516 4.40884 29.3516H19.9644C20.7895 29.3516 21.5808 29.0238 22.1643 28.4403C22.7477 27.8569 23.0755 27.0656 23.0755 26.2405V9.12934M15.2977 1.35156L23.0755 9.12934M7.51995 23.1293H16.8533M7.51995 16.9071H16.8533" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </span>
                 ) : (
                   <span>
-                    <GoUpload size={22} />
+                    <svg className=" h-6 w-6" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M26.623 19.6016V24.6016C26.623 25.2646 26.3597 25.9005 25.8908 26.3693C25.422 26.8382 24.7861 27.1016 24.123 27.1016H6.62305C5.96001 27.1016 5.32412 26.8382 4.85528 26.3693C4.38644 25.9005 4.12305 25.2646 4.12305 24.6016V19.6016M21.623 10.8516L15.373 4.60156M15.373 4.60156L9.12305 10.8516M15.373 4.60156V19.6016" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </span>
                 )}
                 {compliance.documentPdf ? (

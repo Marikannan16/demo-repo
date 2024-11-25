@@ -13,7 +13,7 @@ const CreateCompany = () => {
         companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
         username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
         category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-        establishmentType: '', notificationAlert: '', password: '', image: null,
+        establishmentType: '', notificationAlert: '', password: '', image: null,countOfEmployee:''
     })
     const [emails, setEmails] = useState([]);
     const [selectOptions, setSelectOptions] = useState([]);
@@ -70,7 +70,7 @@ const CreateCompany = () => {
             companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
             username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
             category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-            establishmentType: '', notificationAlert: '', password: '', image: null,
+            establishmentType: '', notificationAlert: '', password: '', image: null,countOfEmployee:''
         })
         navigate('/clientmanagement')
     }
@@ -79,13 +79,12 @@ const CreateCompany = () => {
         e.preventDefault();
         alert('Form submitted!!');
         console.log(company)
-        console.log(emails)
         navigate('/clientmanagement')
         setcompany({
             companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
             username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
             category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-            establishmentType: '', notificationAlert: '', password: '', image: null,
+            establishmentType: '', notificationAlert: '', password: '', image: null,countOfEmployee:''
         })
     }
     const handleSelectedOptions = (options) => {
@@ -127,18 +126,19 @@ const CreateCompany = () => {
                                 { value: "high", label: "High" },
                             ]}
                         />
+                        <TextInput label='Count Of Employee' name='countofemployee' value={company.countOfEmployee} placeholder='Enter the count of Employee' onChange={handleInputChange} />
+                        <TextInput label='Stakehholder Name' name='stakeholderName' value={company.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
+
+                        <TextInput label='User Name' name='username' value={company.username} placeholder='Enter the username' onChange={handleInputChange} />
                         <div className="flex flex-col mb-3 relative">
-                            <label className="block font-semibold mb-2">Assigned Staff</label>
+                            <label className="block font-semibold mb-2">Assigned Staff<span className="text-red-600 ms-1">*</span></label>
                             <CheckedSelect
                                 selectedOptions={selectOptions}
                                 setSelectedOptions={handleSelectedOptions}
                             />
                         </div>
-
-                        <TextInput label='Stakehholder Name' name='stakeholderName' value={company.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
-                        <TextInput label='User Name' name='username' value={company.username} placeholder='Enter the username' onChange={handleInputChange} />
                     </div>
-                    <div className='flex flex-col gap-3 lg:mt-20 pt-2'>
+                    <div className='flex flex-col gap-3 lg:mt-[86px] pt-2'>
                         <SelectInput label="Sub-Category" name="subCategory" value={company.subCategory} onChange={handleInputChange}
                             options={[
                                 { value: "", label: "Select sub category" },
@@ -172,11 +172,11 @@ const CreateCompany = () => {
                                 { value: "none", label: "None" },
                             ]}
                         />
-                        <div className="w-full flex flex-col gap-2 justify-center">
+                        <div className="w-full flex flex-col gap-2 justify-center mb-2">
                             <label className=" text-md font-semibold text-gray-900 ">
-                                Stakeholder detail with mail ID
+                                Stakeholder detail with mail ID <span className="text-red-600 ms-1">*</span>
                             </label>
-                            <div className='flex justify-between items-center'>
+                            <div className='flex justify-between items-center '>
                                 <div className="flex items-center border w-[580px] h-[40px]  py-1 border-bordergray rounded pe-3 justify-between gap-3 overflow-y-scroll">
                                     <div className="flex flex-wrap gap-2 ps-2">
                                         {emails.map((email, index) => (
@@ -200,7 +200,7 @@ const CreateCompany = () => {
                             </div>
 
                         </div>
-                            <TextInput label='Password' type='password' name='password' value={company.password} placeholder='Enter the password' onChange={handleInputChange} />
+                            <TextInput  label='Password' type='password' name='password' value={company.password}  placeholder='Enter the password' onChange={handleInputChange} />
 
                     </div>
                 </div>

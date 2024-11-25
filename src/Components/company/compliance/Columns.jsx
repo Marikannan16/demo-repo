@@ -1,4 +1,5 @@
 import Actions from "../ActionMenu";
+import FileMenu from "../CompanyCompliance/FileMenu";
 
 export const Columns = [
     {
@@ -18,34 +19,41 @@ export const Columns = [
         sortable: true,
     },
     {
-        name: 'Name of the form',
+        name: <p className="text-center">Name of the form</p>,
         selector: (row) => row.nameOfForm,
         sortable: true,
     },
     {
-        name: 'Applicable Law',
+        name: <p className="text-center">Applicable Law</p> ,
         selector: (row) => row.applicationLaw,
         sortable: true,
     },
     {
-        name: 'Type of act',
+        name: <p className="text-center">Type of act</p>,
         selector: (row) => row.typeOfAct,
         sortable: true,
     },
     {
-        name: 'Actual filling frequency',
+        name: <p className="text-center">Actual filling frequency</p>,
         selector: (row) => row.actualFillingFrequency,
         sortable: true,
     },
     {
-        name: 'Last filled date',
+        name: <p className="text-center">Last filled date</p>,
         selector: (row) => row.lastFilledDate,
         sortable: true,
     },
     {
-        name: 'Filling frequency',
+        name: <p className="text-center">Filling frequency</p>,
         selector: (row) => row.fillingFrequency,
         sortable: true,
+    },
+    {
+        name: 'Doc',
+        // selector:(row)=>row.document,
+        cell: (row) =><FileMenu data={row.document} />,
+        width:'150px'
+
     },
     {
         name: 'Actions',

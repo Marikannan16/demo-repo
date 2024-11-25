@@ -40,7 +40,7 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
             </button>
             {dropdownOpen && (
                 // here we can change the checkbox floating logic
-                <div className="absolute top-20 z-10 w-full p-1 bg-white rounded-md shadow-lg border border-bordergray focus:outline-none">
+                <div className="absolute bottom-20 z-10 w-full p-1 bg-white rounded-md shadow-lg border border-bordergray focus:outline-none">
                     {options.map((option) => (
                         <label
                             key={option.id}

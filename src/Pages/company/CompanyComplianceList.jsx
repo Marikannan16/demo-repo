@@ -5,7 +5,7 @@ import { Data } from '../../Components/company/compliance/Data'
 import { IoIosSearch } from 'react-icons/io'
 import { BsSliders } from "react-icons/bs";
 import EditCompliances from '../../Components/company/EditCompliances'
-// import CustomPagination from '../user/CustomPagination'
+import CustomPagination from '../user/CustomPagination'
 
 const CompanyComplianceList = () => {
     const [modal, setModal] = useState(false)
@@ -31,8 +31,8 @@ const CompanyComplianceList = () => {
             [filterName]: !checkedFilter[filterName]
         })
     }
-    // const [currentPage, setCurrentPage] = useState(1)
-    // const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(10)
     const filterData = tableData.filter((item) => {
         return (
             (filter.natureOfActivity ? item.natureOfActivity === filter.natureOfActivity : true) &&
@@ -50,8 +50,8 @@ const CompanyComplianceList = () => {
                 item.fillingFrequency.toLowerCase().includes(search.toLowerCase()))
         );
     });
-    // const totalPages = Math.ceil(filterData.length / itemsPerPage)
-    // const pagination = filterData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    const totalPages = Math.ceil(filterData.length / itemsPerPage)
+    const pagination = filterData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     const customStyles = {
         rows: {
             style: {

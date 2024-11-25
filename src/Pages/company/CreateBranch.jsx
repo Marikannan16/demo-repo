@@ -17,7 +17,7 @@ const CreateBranch = () => {
         branch: '', addressLine1: '', addressLine2: '', contactPerson: '', stakeholderName: '',
         username: '', pincode: '', contactNumber: '', stakeholderDetail: '', category: '',
         state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-        establishmentType: '', notificationAlert: '', password: '', companyImage: null,
+        establishmentType: '', notificationAlert: '', password: '', companyImage: null,countOfEmployee:''
     })
 
     const handleInputChange = (e) => {
@@ -37,7 +37,7 @@ const CreateBranch = () => {
             branch: '', addressLine1: '', addressLine2: '', contactPerson: '', stakeholderName: '',
             username: '', pincode: '', contactNumber: '', stakeholderDetail: '', category: '',
             state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-            establishmentType: '', notificationAlert: '', password: '', companyImage: null,
+            establishmentType: '', notificationAlert: '', password: '', companyImage: null,countOfEmployee:''
         })
         navigate('/clientbranchmanagement')
     
@@ -51,7 +51,7 @@ const CreateBranch = () => {
             branch: '', addressLine1: '', addressLine2: '', contactPerson: '', stakeholderName: '',
             username: '', pincode: '', contactNumber: '', stakeholderDetail: '', category: '',
             state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
-            establishmentType: '', notificationAlert: '', password: '', companyImage: null,
+            establishmentType: '', notificationAlert: '', password: '', companyImage: null,countOfEmployee:''
         })
         navigate('clientbranchmanagement')
     }
@@ -93,7 +93,7 @@ const CreateBranch = () => {
         <div className='h-full p-5 shadow-lg'>
             <h2 className='text-xl font-bold'>Add Branch</h2>
             <form onSubmit={handleSubmit} className='pt-4 lg:p-0'>
-                <FileInput imageLabel='--- Corporation' onImageChange={handleFileChange} imageSection={branch.companyImage} />
+                <FileInput imageLabel='Company Logo' onImageChange={handleFileChange} imageSection={branch.companyImage} />
                 <div className='grid grid-cols-1 gap-2 mb-6 lg:grid-cols-2 lg:gap-10'>
                     <div className='flex flex-col gap-3'>
                         <SelectInput label="Category" name="category" value={branch.category} onChange={handleInputChange}
@@ -123,6 +123,9 @@ const CreateBranch = () => {
                                 { value: "high", label: "High" },
                             ]}
                         />
+                        <TextInput label='Count Of Employee' name='countofemployee' value={branch.contactPerson} placeholder='Enter the Count of Employee' onChange={handleInputChange} />
+                        <TextInput label='Stakehholder Name' name='stakeholderName' value={branch.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
+                        <TextInput label='User Name' name='username' value={branch.username} placeholder='Enter the username' onChange={handleInputChange} />
                         <div className="flex flex-col mb-3 relative">
                             <label className="block font-semibold mb-2">Assigned Staff</label>
                             <CheckedSelect
@@ -130,10 +133,8 @@ const CreateBranch = () => {
                                 setSelectedOptions={handleSelectedOptions}
                             />
                         </div>
-                        <TextInput label='Stakehholder Name' name='stakeholderName' value={branch.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
-                        <TextInput label='User Name' name='username' value={branch.username} placeholder='Enter the username' onChange={handleInputChange} />
                     </div>
-                    <div className='flex flex-col gap-3'>
+                    <div className='flex flex-col gap-3 -mt-0.5'>
                         <SelectInput label="Sub-Category" name="subCategory" value={branch.subCategory} onChange={handleInputChange}
                             options={[
                                 { value: "", label: "Select sub category" },

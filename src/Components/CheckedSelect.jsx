@@ -42,7 +42,7 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
                     ? 
 
                     ` ${selectedOptions} `
-                    : 'Select the priority type'}
+                    : <label>Select Priority Type<span className="text-red-600 ms-1">*</span></label>}
                 <FaAngleDown />
             </button>
             {dropdownOpen && (
