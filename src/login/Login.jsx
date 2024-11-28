@@ -36,9 +36,7 @@ const Login = ({ value }) => {
         navigate('/home');
       });
     } else {
-      // Failed login
       Swal.fire({
-
         icon: 'error',
         title: 'Failed!',
         text: 'Invalid email or password!',

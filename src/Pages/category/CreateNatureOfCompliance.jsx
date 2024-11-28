@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 const NatureofCompliance = () => {
   return (
    <>
-       <div className='flex  w-full justify-between items-center p-5' >
+       <div className='flex  w-full justify-between  items-center p-5' >
                 <h2 className=' w-full font-semibold text-lg'>Create Nature Of Compliance</h2>
-                <Link to="/naturecompliancelist"><button className='w-full text-white  py-2  lg:w-52  rounded-md bg-primary'> Nature Of Compliance List </button> </Link>
+                <Link to="/naturecompliancelist"><button className='w-64 text-white  py-2 sm:text-center   rounded-md bg-primary'> Nature Of Compliance List </button> </Link>
        </div>
        <div className='m-10 mb-5'>
                 <h4 className='font-semibold'> Nature of compliance </h4> 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaEnvelope, FaDownload } from 'react-icons/fa';
 
 const Menu = ({ onDownload }) => {
     return (
@@ -7,17 +8,18 @@ const Menu = ({ onDownload }) => {
                 <h5 className="p-5 font-semibold">Notification</h5>
             </div>
             <div className="flex items-center space-x-2 px-5 py-5">
-                <button className='w-10 h-10 bg-primary p-2 rounded-full'>
-                    <svg viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 2.55512C1 2.08363 1.1873 1.63144 1.5207 1.29804C1.8541 0.964645 2.30628 0.777344 2.77778 0.777344H15.2222C15.6937 0.777344 16.1459 0.964645 16.4793 1.29804C16.8127 1.63144 17 2.08363 17 2.55512M1 2.55512V11.444C1 11.9155 1.1873 12.3677 1.5207 12.7011C1.8541 13.0345 2.30628 13.2218 2.77778 13.2218H15.2222C15.6937 13.2218 16.1459 13.0345 16.4793 12.7011C16.8127 12.3677 17 11.9155 17 11.444V2.55512M1 2.55512L9 7.88845L17 2.55512" strokeWidth={1} stroke="white" />
+                <button className="rounded-full bg-primary px-1 ps-2 h-10 w-10 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                     </svg>
                 </button>
                 <button
-                    className='w-10 h-10 bg-primary p-2.5 rounded-full'
+                    className="rounded-full bg-primary p-2 w-10 h-10 text-white"
                     onClick={onDownload}>
-                    <svg viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.10096 12.4503L4.09724 8.44769L4.89821 7.63314L7.5353 10.2702V0.484375H8.66661V10.2702L11.3026 7.63427L12.1047 8.44769L8.10096 12.4503ZM0.181763 16.3228V11.7545H1.31308V15.1914H14.8888V11.7545H16.0201V16.3228H0.181763Z" fill="white" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
+
                 </button>
             </div>
         </div>
@@ -25,27 +27,3 @@ const Menu = ({ onDownload }) => {
 };
 
 export default Menu;
-
-
-// import React from 'react';
-// import { FaEnvelope, FaDownload } from 'react-icons/fa';
-
-// const Menu = () => {
-//     return (
-//         <div className="flex flex-col mb-4 justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between">
-//             <div>
-//                 <h3 className="text-xl font-bold">Notification</h3>
-//             </div>
-//             <div className="flex items-center gap-2 ">
-//                 <button className="rounded-full bg-primary px-3 py-3 text-white">
-//                     <FaEnvelope />
-//                 </button>
-//                 <button className="rounded-full bg-primary px-3 py-3 text-white">
-//                     <FaDownload size={15} />
-//                 </button>
-//             </div>
-//         </div>
-//     );
-
-// }
-// export default Menu;

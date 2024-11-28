@@ -6,11 +6,12 @@ import logo from '../../Images/sky.jpg'
 import { IoNotificationsOffOutline, IoTrashOutline } from 'react-icons/io5'
 import { AiOutlineFileSearch, AiOutlineMail } from 'react-icons/ai'
 import DataTable from 'react-data-table-component'
-import ActionMenu from '../../Components/compliance list/ActionMenu'
+import ActionMenu from '../../Components/ActionMenu'
 import { Clients } from '../../Components/company/Data'
 import { Link, useNavigate } from 'react-router-dom'
 const ClientManagement = () => {
     const navigate = useNavigate()
+    const [selectedRow, setSelectedRow] = useState(null);
     const columns = [
         {
             sno: 1,
@@ -47,7 +48,20 @@ const ClientManagement = () => {
         {
             sno: 5,
             name: "Action",
-            cell: (row) => <ActionMenu row={row} />,
+            cell: (row) => (
+                <div className='h-5 w-5 relative' onClick={() => toggleAction(row.sno)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                    </svg>
+                    {selectedRow === row.sno && (
+                        <ActionMenu
+                            onView={() => handleView(row.sno)}
+                            onEdit={() => handleEdit(row.sno)}
+                            onDelete={() => handleDelete(row.sno)}
+                        />
+                    )
+                    }
+                </div>),
             ignoreClick: true,
             center: true
 
@@ -87,6 +101,21 @@ const ClientManagement = () => {
     const branch = () => {
         navigate('/clientbranchmanagement')
     }
+    const toggleAction = (Rowid) => {
+        setSelectedRow(selectedRow === Rowid ? null : Rowid)
+    }
+    const handleView = ({ id }) => {
+        alert(`${id} was viewed`)
+    }
+
+    const handleEdit = (id) => {
+        toggleModal(id);
+    }
+
+    const handleDelete = ({ id }) => {
+        console.log(`${id} was Deleted`)
+    }
+
     return (
         <div className='h-screen'>
             <div className="flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between">

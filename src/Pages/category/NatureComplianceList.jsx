@@ -103,7 +103,7 @@ const NatureComplianceList = () => {
 
             }
           </div>
-          <Link to="/createnaturecompliance"><button className=' py-2 w-56  rounded-md text-white bg-primary' >Create Nature Of Compliance </button></Link>
+          <Link to="/createnaturecompliance"><button className=' py-2 w-64  rounded-md text-white bg-primary' >Create Nature Of Compliance </button></Link>
         </div>
       </div>
 

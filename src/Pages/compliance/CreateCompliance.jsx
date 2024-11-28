@@ -69,7 +69,6 @@ const CreateCompliance = () => {
       text: 'Do you Want to Save the Compliance',
       imageUrl: "/src/Images/done.png",
       imageHeight: 100,
-      imageHeight: 100,
       showCancelButton: true,
       iconColor: "#d7b95f",
       confirmButtonColor: "#d7b95f",

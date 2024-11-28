@@ -6,14 +6,28 @@ import logo from '../../Images/sky.jpg'
 import { IoNotificationsOffOutline, IoTrashOutline } from 'react-icons/io5'
 import { AiOutlineFileSearch, AiOutlineMail } from 'react-icons/ai'
 import DataTable from 'react-data-table-component'
-import ActionMenu from '../../Components/company/ActionMenu'
+import ActionMenu from '../../Components/ActionMenu'
 import { Link } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 const ClientBranchManagement = () => {
+    const [selectedRow, setSelectedRow] = useState(null);
+    const toggleAction = (Rowid) => {
+        setSelectedRow(selectedRow === Rowid ? null : Rowid)
+    }
+    const handleView = ({ id }) => {
+        alert(`${id} was viewed`)
+    }
 
+    const handleEdit = (id) => {
+        toggleModal(id);
+    }
 
+    const handleDelete = ({ id }) => {
+        console.log(`${id} was Deleted`)
+    }
     const Branch = [
         {
+            sno:1,
             company: "ace catering equipment",
             Area: 'karntaka',
             Branch: "bangolore",
@@ -21,6 +35,7 @@ const ClientBranchManagement = () => {
             prioriy: "complete"
         },
         {
+            sno:2,
             company: "ace catering equipment",
             Area: 'karntaka',
             email: "isabella235@gmail.com",
@@ -28,7 +43,8 @@ const ClientBranchManagement = () => {
             Branch: "agra",
             prioriy: "complete"
         },
-        {
+        { 
+            sno:3,
             company: "ace catering equipment",
             Area: 'karntaka',
             email: "paulacecatering@gmail.com",
@@ -38,6 +54,7 @@ const ClientBranchManagement = () => {
         },
 
         {
+            sno:4,
             company: "ace catering equipment",
             Area: 'karntaka',
             email: "rachel@gmail.com",
@@ -51,7 +68,7 @@ const ClientBranchManagement = () => {
             name: "sno",
             selector: row => row.sno,
             sortable: true,
-            width: '90px',
+            width: '100px',
             grow: 1
         },
         {
@@ -93,8 +110,22 @@ const ClientBranchManagement = () => {
         },
         {
             name: "Action",
-            cell: (row) => <ActionMenu row={row} />,
+            cell: (row) => (
+                <div className='h-5 w-5 relative' onClick={() => toggleAction(row.sno)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                    </svg>
+                    {selectedRow === row.sno && (
+                        <ActionMenu
+                            onView={() => handleView(row.sno)}
+                            onEdit={() => handleEdit(row.sno)}
+                            onDelete={() => handleDelete(row.sno)}
+                        />
+                    )
+                    }
+                </div>),
             ignoreClick: true,
+            center:1
 
         }
     ]
