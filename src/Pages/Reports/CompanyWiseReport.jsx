@@ -1,20 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { HiOutlineDownload } from "react-icons/hi";
-import { IoIosSearch } from "react-icons/io";
 import DataTable from 'react-data-table-component';
-import { PiCaretUpDownFill } from "react-icons/pi";
 import CompanyData from '../../Components/reports/CompanyDatas';
 import { Link } from 'react-router-dom';
-import { FaSliders } from 'react-icons/fa6';
 import CustomPagination from '../../Components/CustomPagination';
-import { CompanyColumns } from '../../Components/reports/CompanyColumns';
-import { CiMail } from 'react-icons/ci';
-import { FiPrinter } from 'react-icons/fi';
 import moment from 'moment'; 
-import { MdOutlineCalendarMonth } from 'react-icons/md';
-import ActionMenu from '../../Components/compliance list/ActionMenu';
-import { LuDownload } from 'react-icons/lu';
-import { BsFiletypeCsv, BsFiletypePdf } from 'react-icons/bs';
+import ActionMenu from '../../Components/ActionMenu';
 import html2pdf  from 'html2pdf.js';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -25,6 +15,7 @@ import "flatpickr/dist/themes/material_blue.css";
 const CompanyWiseReport = () => {
   const [data] = useState(CompanyData);
   const printref=useRef()
+  const [selectedRow, setSelectedRow] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const[DownMenu,setDownMenu]=useState(false)
   const pdfref=useRef()             
@@ -69,12 +60,25 @@ const CompanyWiseReport = () => {
   });
 
   const handleFilterReset = () => {
-    // Reset or fetch all data when Filed_Date is empty
     if (!selectValue.Filed_Date) {
-      // Reset data logic here, e.g., fetch all records
-      setFilteredData(originalData); // Replace with your actual reset logic
+      setFilteredData(originalData); 
     }
   };
+  const toggleAction = (Rowid) => {
+    setSelectedRow(selectedRow === Rowid ? null : Rowid)
+  }
+  const handleView=({id})=>{
+    alert(`${id} was viewed`)
+  }
+
+  const handleEdit=({id})=>{
+    alert(`${id} was Edited`)
+  }
+
+  const handleDelete=({id})=>{
+    alert(`${id} was Deleted`)
+  }
+
   const handleCheckboxChange = (filterName) => {
     setFilters({
       ...filters,
@@ -158,7 +162,7 @@ const downloadCSV = () => {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.setAttribute('download', 'subcategory.csv');
+  link.setAttribute('download', 'CompanyWiseReport.csv');
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -182,12 +186,26 @@ html2pdf()
       <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-semibold text-lg'>Company Wise Report ({filter.length})</h2>
         <div className='flex gap-3 items-center'>
-          <button onClick={()=>window.print()} ><FiPrinter className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
-          <button><CiMail className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
-          <div className='relative'><button className="bg-primary text-white rounded-full mt-1 p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
-         {DownMenu && <div className='absolute mt-5 lg:right-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
-                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
-                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18}/>  Download CSV</span>
+          <button onClick={()=>window.print()} className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+          </svg>
+
+          </button>
+          <button className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'>
+          <svg  viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 2.55512C1 2.08363 1.1873 1.63144 1.5207 1.29804C1.8541 0.964645 2.30628 0.777344 2.77778 0.777344H15.2222C15.6937 0.777344 16.1459 0.964645 16.4793 1.29804C16.8127 1.63144 17 2.08363 17 2.55512M1 2.55512V11.444C1 11.9155 1.1873 12.3677 1.5207 12.7011C1.8541 13.0345 2.30628 13.2218 2.77778 13.2218H15.2222C15.6937 13.2218 16.1459 13.0345 16.4793 12.7011C16.8127 12.3677 17 11.9155 17 11.444V2.55512M1 2.55512L9 7.88845L17 2.55512" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          </button>
+          <div className='relative'><button className="w-9 h-9 bg-primary text-white rounded-full mt-1 p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+
+          </button>
+         {DownMenu && <div className='absolute mt-5 lg:right-0 w-44 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
+                        <span className='flex justify-center gap-5 items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} >Download PDF</span>
+                        <span className='flex justify-center gap-5 items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} >Download CSV</span>
                      </div>}
           </div>
           </div>
@@ -241,7 +259,7 @@ html2pdf()
         {filters.filedate && (
     <div className='relative z-20 lg:w-32 w-full bg-white'>
       <Flatpickr
-        className='focus-visible focus-visible:outline-none lg:w-32 w-full py-1.5 ps-2 border border-bordergray rounded-md'
+        className='focus-visible focus-visible:outline-none lg:w-32 w-full py-1.5 ps-1 text-sm border border-bordergray rounded-md'
         value={startDate}
         onChange={(selectedDates) => {
           if (selectedDates.length === 2) {
@@ -285,8 +303,11 @@ html2pdf()
       )}
       {!startDate && (
         
-      <span className='absolute top-2 right-2'>
-      <MdOutlineCalendarMonth size={20} />
+      <span className='absolute top-1.5 right-2'>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+      </svg>
+
     </span>
       )}
     </div>
@@ -295,13 +316,20 @@ html2pdf()
 
         <span className='w-full lg:w-36 relative'>
       <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md placeholder:text-black ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
-     <IoIosSearch className='absolute top-1.5 left-2 text-input' size={23} />
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className='absolute top-1.5 left-2 h-7 w-6  text-input'>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+
         </span>
         <span className='relative'>
-          <FaSliders size={35} className="p-1.5 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="p-1.5 h-10 w-10 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+        </svg>
+
+          {/* <FaSliders size={35} className="p-1.5 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} /> */}
           <div className='absolute z-30 lg:-left-44 left-0 top-10'>
             {showMenu && (
-              <div className='border border-gray-300 rounded-md p-4 w-56 bg-white shadow-md'>
+              <div className='border border-bordergray rounded-md p-4 w-64 bg-white shadow-md'>
                  <label>
                   <input type='checkbox' checked={filters.sno} onChange={() => handleCheckboxChange('sno')} className='me-3 accent-black' />
                   S No
@@ -379,7 +407,7 @@ html2pdf()
                 omit:filters.sno==false,
             },
             {
-                name:"Company Name",
+                name:<p className='text-center'>Company Name</p>,
                 selector:row=>row.Company_Name,
                 sortable:true,
                 width:'160px',
@@ -408,17 +436,19 @@ html2pdf()
                 omit:filters.activity==false,
               },
               {
-                name:"Nature of Activity",
+                name:<p className='text-center ms-3'>Nature of Activity</p>,
                 selector:row=>row.NatureofActivity,
+                center:1,
                 sortable:true,
-                width:'100px',
+                width:'150px',
+                
                 omit:filters.natureact==false,
             },
             {
-                name:"Name of the Form",
+                name:<p className='text-center'>Name of the Form</p>,
                 selector:row=>row.Form_name,
                 sortable:true,
-                width:'160px',
+                width:'180px',
                 omit:filters.formname==false,
             },
             {
@@ -474,7 +504,7 @@ html2pdf()
                 name:"Status",
                 cell:(row)=><p className={`${row.Status ==='Complied' ? 'text-green-600':row.Status==='Not Complied'? 'text-red-600':'text-yellow-500'}`}>{row.Status}</p>,
                 sortable:true,
-                width:'100px',
+                width:'150px',
                 omit:filters.status==false,
             },
             {
@@ -482,14 +512,27 @@ html2pdf()
                 // selector:row=>row.Action,
                 // cell:(row)=><button><SlOptionsVertical/></button>,
                 name: 'Actions',
-                cell:(row)=>(<ActionMenu/>),
-                ignoreRowClick:true,
+                cell: (row) =>(
+                  <div className='h-5 w-5 relative' onClick={()=>toggleAction(row.Sno)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                    </svg>
+                    {selectedRow=== row.Sno&&(
+                      <ActionMenu 
+                      onView={()=>handleView(row.Sno)}
+                      onEdit={()=>handleEdit(row.Sno)}
+                      onDelete={()=>handleDelete(row.Sno)}
+                      />
+                    )
+                    }
+  
+                  </div>),
+                // ignoreRowClick:true,
                 width:'100px',
                 omit:filters.actions==false
             }
         ]
         } 
-        sortIcon={<PiCaretUpDownFill />}
         data={filter}
         responsive
         selectableRows

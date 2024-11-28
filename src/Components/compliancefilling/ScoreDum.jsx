@@ -5,7 +5,6 @@ const Dummy = ({ percent, things }) => {
     const strokeWidth = 3
     const circumference = 2 * Math.PI * radius
     const strokeDashOffset = circumference - (circumference * percent) / 100
-    console.log(things.label)
 
     return (
         <>

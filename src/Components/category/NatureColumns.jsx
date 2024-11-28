@@ -1,4 +1,4 @@
-import ActionMenu from "./ActionMenu";
+import ActionMenu from "../../Components/ActionMenu";
 const NatureColumns = [
     {
         name: 'S NO',

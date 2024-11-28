@@ -6,7 +6,7 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    src:url('./fonts/popins/Poppins-Regular.ttf') format('truetype');
+    src:url('../public/fonts/popins/Poppins-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -38,7 +38,9 @@ Link{
 *{
     scrollbar-width: thin; 
     scrollbar-color: #f2f0f0 #ffffff; 
-    @apply font-pop ;
+    @apply font-pop  ;
+    font-size:14px;
+
     
     /* scroll-padding: 10px; */
 }
@@ -70,4 +72,7 @@ Link{
 
 *{
     -webkit-text-size-adjust: none; 
+}
+input[type="checkbox"]{
+    @apply accent-black;
 }

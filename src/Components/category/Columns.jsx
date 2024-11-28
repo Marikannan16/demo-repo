@@ -1,4 +1,4 @@
-import ActionMenu from './ActionMenu'
+import ActionMenu from '../../Components/ActionMenu';
 import { HiDotsVertical } from "react-icons/hi";    
 const columns = [
     {
@@ -14,8 +14,7 @@ const columns = [
     },
     {
         name: 'Actions',
-        cell:(row)=><ActionMenu row={row}/>,
-        
+        cell:(row)=><ActionMenu row={row}/>,   
         ignoreClick:true,
         selector: row => row.actions,
         right:true,

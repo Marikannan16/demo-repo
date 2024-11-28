@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import TextInput from "../../Components/TextInput";
 import SelectInput from "../../Components/SelectInput";
 import Button from "../../Components/Button";
@@ -7,6 +7,7 @@ import CheckedSelect from "../../Components/CheckedSelect";
 import Swal from 'sweetalert2';
 
 const CreateCompliance = () => {
+  const replaceRef = useRef(null);
   const navigate = useNavigate();
   const [fileName, setFileName] = useState('')
   const [selectOptions, setSelectOptions] = useState([]);
@@ -15,9 +16,10 @@ const CreateCompliance = () => {
     activity: "",
     typeOfAct: "",
     applicationLaborAct: "",
+    calendartype: "",
     dueDate: "",
     section: "",
-    remarks: "",
+    score: "",
     nameOfForm: "",
     state: "",
     applicability: "",
@@ -45,9 +47,10 @@ const CreateCompliance = () => {
       activity: "",
       typeOfAct: "",
       applicationLaborAct: "",
+      calendartype: "",
       dueDate: "",
       section: "",
-      remarks: "",
+      score: "",
       nameOfForm: "",
       state: "",
       applicability: "",
@@ -81,7 +84,8 @@ const CreateCompliance = () => {
           applicationLaborAct: "",
           dueDate: "",
           section: "",
-          remarks: "",
+          score: "",
+          calendartype: "",
           nameOfForm: "",
           state: "",
           applicability: "",
@@ -125,7 +129,7 @@ const CreateCompliance = () => {
     //         applicationLaborAct: "",
     //         dueDate: "",
     //         section: "",
-    //         remarks: "",
+    //         score: "",
     //         nameOfForm: "",
     //         state: "",
     //         applicability: "",
@@ -168,7 +172,7 @@ const CreateCompliance = () => {
               value={compliance.natureOfCompliance}
               onChange={handleInputChange}
               options={[
-                { value: "", label: "SELECT" },
+                { value: "", label: "Enter the Nature of Compliance" },
                 { value: "Statutory payment", label: "Statutory payment" },
                 { value: "Registration", label: "Registration" },
 
@@ -199,13 +203,6 @@ const CreateCompliance = () => {
               placeholder="Enter The applicable law"
               onChange={handleInputChange}
             />
-            <TextInput
-              label="Due Date"
-              name="dueDate"
-              value={compliance.dueDate}
-              placeholder="Enter the due date"
-              onChange={handleInputChange}
-            />
             <div className="flex flex-col mb-3 relative">
               <label className="block font-semibold mb-2">Priority Type</label>
               <CheckedSelect
@@ -213,6 +210,24 @@ const CreateCompliance = () => {
                 setSelectedOptions={handleSelectedOptions}
               />
             </div>
+            <SelectInput
+              label="Type Of Act"
+              name="typeOfAct"
+              value={compliance.typeOfAct}
+              onChange={handleInputChange}
+              options={[
+                { value: "", label: "Select The Type Of Act" },
+                { value: "state", label: "State" },
+                { value: "central", label: "Central" },
+              ]}
+            />
+            <TextInput
+              label="Due Date"
+              name="dueDate"
+              value={compliance.dueDate}
+              placeholder="Enter the due date"
+              onChange={handleInputChange}
+            />
             {/* <SelectInput
               label="Priority Type"
               name="priorityType"
@@ -225,41 +240,8 @@ const CreateCompliance = () => {
                 { value: "low", label: "Low" },
               ]}
             /> */}
-            <div className="mb-2">
-              <label className="block mb-2 font-semibold">
-                Upload Document
-              </label>
-              <label
-                htmlFor="documentPdf"
-                className="bg-primary text-white w-36 relative px-4 py-2 flex gap-3 justify-center items-center rounded cursor-pointer"
-              >
-                {compliance.documentPdf ? (
-                  <span>
-                    <svg className=" h-6 w-6" viewBox="0 0 25 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15.2977 1.35156V7.57378C15.2977 7.98634 15.4616 8.38201 15.7533 8.67373C16.0451 8.96545 16.4407 9.12934 16.8533 9.12934H23.0755M15.2977 1.35156H4.40884C3.58372 1.35156 2.7924 1.67934 2.20895 2.26279C1.62551 2.84623 1.29773 3.63756 1.29773 4.46267V26.2405C1.29773 27.0656 1.62551 27.8569 2.20895 28.4403C2.7924 29.0238 3.58372 29.3516 4.40884 29.3516H19.9644C20.7895 29.3516 21.5808 29.0238 22.1643 28.4403C22.7477 27.8569 23.0755 27.0656 23.0755 26.2405V9.12934M15.2977 1.35156L23.0755 9.12934M7.51995 23.1293H16.8533M7.51995 16.9071H16.8533" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                ) : (
-                  <span>
-                    <svg className=" h-6 w-6" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M26.623 19.6016V24.6016C26.623 25.2646 26.3597 25.9005 25.8908 26.3693C25.422 26.8382 24.7861 27.1016 24.123 27.1016H6.62305C5.96001 27.1016 5.32412 26.8382 4.85528 26.3693C4.38644 25.9005 4.12305 25.2646 4.12305 24.6016V19.6016M21.623 10.8516L15.373 4.60156M15.373 4.60156L9.12305 10.8516M15.373 4.60156V19.6016" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                )}
-                {compliance.documentPdf ? (
-                  <span>{fileName.slice(0, 4)}..{fileName.slice(-5,)}</span>
-                ) : (
-                  <span className="font-semibold">upload</span>
-                )}
-                <input
-                  id="documentPdf"
-                  type="file"
-                  accept="pdf/*"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-              </label>
-            </div>
+            
+            {/* <div className="w-36 h-8  bg-green-400 cursor-pointer" onClick={handleFileChange}>Replace</div> */}
           </div>
           <div className="flex flex-col gap-3">
             <TextInput
@@ -301,6 +283,26 @@ const CreateCompliance = () => {
               onChange={handleInputChange}
             />
             <SelectInput
+              label="Score"
+              name="score"
+              value={compliance.score}
+              onChange={handleInputChange}
+              options={[
+                { value: "", label: "Select The Score" },
+                { value: "1", label: "1" },
+                { value: "2", label: "2" },
+                { value: "3", label: "3" },
+                { value: "4", label: "4" },
+                { value: "5", label: "5" },
+                { value: "6", label: "6" },
+                { value: "7", label: "7" },
+                { value: "8", label: "8" },
+                { value: "9", label: "9" },
+                { value: "10", label: "10" },
+
+              ]}
+            />
+            <SelectInput
               label="Frequency of Compliance"
               name="frequencyOfCompliance"
               value={compliance.frequencyOfCompliance}
@@ -325,17 +327,48 @@ const CreateCompliance = () => {
                 { value: "12 Year Once", label: "12 Year Once" },
               ]}
             />
-            <TextInput
-              label="Remarks"
-              name="remarks"
-              value={compliance.remarks}
-              placeholder="Enter the remarks"
-              onChange={handleInputChange}
-              required={false}
-            />
+            <div className="mb-2">
+              <label className="block mb-2 font-semibold">
+                Upload Document
+              </label>
+              <label
+                htmlFor="documentPdf"
+                className="bg-primary text-white w-36 relative px-4 py-2 flex gap-3 justify-center items-center rounded cursor-pointer"
+              >
+                {compliance.documentPdf ? (
+                  <span>
+                    <svg className=" h-6 w-6" viewBox="0 0 25 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.2977 1.35156V7.57378C15.2977 7.98634 15.4616 8.38201 15.7533 8.67373C16.0451 8.96545 16.4407 9.12934 16.8533 9.12934H23.0755M15.2977 1.35156H4.40884C3.58372 1.35156 2.7924 1.67934 2.20895 2.26279C1.62551 2.84623 1.29773 3.63756 1.29773 4.46267V26.2405C1.29773 27.0656 1.62551 27.8569 2.20895 28.4403C2.7924 29.0238 3.58372 29.3516 4.40884 29.3516H19.9644C20.7895 29.3516 21.5808 29.0238 22.1643 28.4403C22.7477 27.8569 23.0755 27.0656 23.0755 26.2405V9.12934M15.2977 1.35156L23.0755 9.12934M7.51995 23.1293H16.8533M7.51995 16.9071H16.8533" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                ) : (
+                  <span>
+                    <svg className=" h-6 w-6" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M26.623 19.6016V24.6016C26.623 25.2646 26.3597 25.9005 25.8908 26.3693C25.422 26.8382 24.7861 27.1016 24.123 27.1016H6.62305C5.96001 27.1016 5.32412 26.8382 4.85528 26.3693C4.38644 25.9005 4.12305 25.2646 4.12305 24.6016V19.6016M21.623 10.8516L15.373 4.60156M15.373 4.60156L9.12305 10.8516M15.373 4.60156V19.6016" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                )}
+                {compliance.documentPdf ? (
+                  <span>{fileName.slice(0, 4)}..{fileName.slice(-5,)}</span>
+                ) : (
+                  <span className="font-semibold">upload</span>
+                )}
+                <input
+      
+                  id="documentPdf"
+                  ref={replaceRef}
+                  type="file"
+                  accept="pdf/*"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
+          
+            {compliance.documentPdf && <button type="button" className=" w-24 h-6 bg-primary text-white rounded ps-2 text-left" onClick={()=>replaceRef.current.click()}>Replace</button>}
           </div>
         </div>
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-5 mt-16">
           <Button
             label="Cancel"
             onClick={handleCancel}

@@ -4,16 +4,17 @@ import { Data } from '../../Components/compliance list/data'
 import { columns } from "../../Components/compliance list/Columns";
 import { Link } from 'react-router-dom';
 import CustomPagination from '../../Components/CustomPagination';
-import ActionMenu from '../../Components/category/ActionMenu';
+import ActionMenu from '../../Components/ActionMenu';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
 const ComplianceList = () => {
   const [data] = useState(Data)
-  const [downMenu, setDownMenu] = useState(false)
+  // const [downMenu, setDownMenu] = useState(false)
   const [search, setSearch] = useState('')
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [selectedRow, setSelectedRow] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [selectValue, setSelectValue] = useState({
     compliance: '',
@@ -22,6 +23,9 @@ const ComplianceList = () => {
     frequency: ''
   });
 
+  const toggleAction = (Rowid) => {
+    setSelectedRow(selectedRow === Rowid ? null : Rowid)
+  }
 
   const [filters, setFilters] = useState({
     sno: true,
@@ -42,6 +46,18 @@ const ComplianceList = () => {
       [filterName]: !filters[filterName],
     });
   };
+
+  const handleView=({id})=>{
+    alert(`${id} was viewed`)
+  }
+
+  const handleEdit=({id})=>{
+    alert(`${id} was Edited`)
+  }
+
+  const handleDelete=({id})=>{
+    alert(`${id} was Deleted`)
+  }
 
 
   // const [selectValue,setSelectValue]=useState({activity: "",
@@ -79,9 +95,9 @@ const ComplianceList = () => {
     },
     headCells: {
       style: {
-        overflowWrap:'break-word',
-        backgroundColor:'#000',
-        color:'white'
+        overflowWrap: 'break-word',
+        backgroundColor: '#000',
+        color: 'white'
       }
     },
     cells: {
@@ -142,7 +158,7 @@ const ComplianceList = () => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages);
     }
-  }, [filter, currentPage, totalPages,search])
+  }, [filter, currentPage, totalPages, search])
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -203,14 +219,14 @@ const ComplianceList = () => {
           </svg>
         </span>
         <span className='relative'>
-        <svg className='h-10 w-10 p-2.5 rounded-md border border-bordergray' viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => setShowMenu(!showMenu)} >
+          <svg className='h-10 w-10 p-2.5 rounded-md border border-bordergray' viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => setShowMenu(!showMenu)} >
             <path d="M9 2.50391C9 3.03434 9.21071 3.54305 9.58579 3.91812C9.96086 4.29319 10.4696 4.50391 11 4.50391C11.5304 4.50391 12.0391 4.29319 12.4142 3.91812C12.7893 3.54305 13 3.03434 13 2.50391M9 2.50391C9 1.97347 9.21071 1.46477 9.58579 1.08969C9.96086 0.71462 10.4696 0.503906 11 0.503906C11.5304 0.503906 12.0391 0.71462 12.4142 1.08969C12.7893 1.46477 13 1.97347 13 2.50391M9 2.50391H1M13 2.50391H17M3 8.50391C3 9.03434 3.21071 9.54305 3.58579 9.91812C3.96086 10.2932 4.46957 10.5039 5 10.5039C5.53043 10.5039 6.03914 10.2932 6.41421 9.91812C6.78929 9.54305 7 9.03434 7 8.50391M3 8.50391C3 7.97347 3.21071 7.46477 3.58579 7.08969C3.96086 6.71462 4.46957 6.50391 5 6.50391C5.53043 6.50391 6.03914 6.71462 6.41421 7.08969C6.78929 7.46477 7 7.97347 7 8.50391M3 8.50391H1M7 8.50391H17M12 14.5039C12 15.0343 12.2107 15.543 12.5858 15.9181C12.9609 16.2932 13.4696 16.5039 14 16.5039C14.5304 16.5039 15.0391 16.2932 15.4142 15.9181C15.7893 15.543 16 15.0343 16 14.5039M12 14.5039C12 13.9735 12.2107 13.4648 12.5858 13.0897C12.9609 12.7146 13.4696 12.5039 14 12.5039C14.5304 12.5039 15.0391 12.7146 15.4142 13.0897C15.7893 13.4648 16 13.9735 16 14.5039M12 14.5039H1M16 14.5039H17" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           {/* <FaSliders size={35} className="p-1.5 bg-white print:bg-white border border-gray-400 rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} /> */}
           <div className='absolute z-30 top-10 lg:'>
             {showMenu &&
               (
-                <div className='border border-bordergray rounded-md p-4 w-56 bg-white shadow-md'>
+                <div className='border border-bordergray rounded-md p-4 w-64 bg-white shadow-md'>
                   <label >
                     <input type='checkbox' checked={filters.sno} onChange={() => handleCheckboxChange('sno')} className='me-3 accent-black' />
                     Sno
@@ -259,7 +275,7 @@ const ComplianceList = () => {
         </span>
       </div>
 
-      <div className='w-auto -z-40 text-wrap'>
+      <div className='w-full -z-40 text-wrap'>
 
         <DataTable
           columns={[
@@ -275,7 +291,7 @@ const ComplianceList = () => {
               name: 'Nature Of Activity',
               selector: (row) => row.natureOfActivity,
               sortable: true,
-              width:'155px',
+              width: '155px',
               omit: filters.natureofactivity == false,
 
             },
@@ -283,16 +299,16 @@ const ComplianceList = () => {
               name: 'Activity',
               selector: (row) => row.activity,
               sortable: true,
-              width:'170px',
-              left:true,
+              width: '170px',
+              left: true,
               omit: filters.activity == false,
 
             },
             {
               name: 'Name of the Form',
-              selector: (row) =><p className='text-wrap'>{row.nameOfForm}</p> ,
+              selector: (row) => <p className='text-wrap'>{row.nameOfForm}</p>,
               sortable: true,
-              width:'180px',
+              width: '200px',
               omit: filters.formname == false,
               grow: 2
             },
@@ -305,10 +321,10 @@ const ComplianceList = () => {
             },
             {
               name: 'Applicable Law',
-              selector: (row) =><p className='text-wrap'>{row.applicationLaw}</p>,
+              selector: (row) => <p className='text-wrap'>{row.applicationLaw}</p>,
               sortable: true,
               omit: filters.applicablelaw == false,
-              width:'200px'
+              width: '220px'
             },
             {
               name: 'Type of Act',
@@ -321,7 +337,7 @@ const ComplianceList = () => {
               name: <p>Actual Filling Frequency</p>,
               selector: (row) => row.actualFillingFrequency,
               sortable: true,
-              width:'150px',
+              width: '200px',
               omit: filters.actualfilling == false,
 
             },
@@ -342,19 +358,33 @@ const ComplianceList = () => {
             // },
             {
               name: 'Actions',
-              cell: (row) => <ActionMenu row={row} />,
+              cell: (row) =>(
+                <div className='h-5 w-5 relative' onClick={()=>toggleAction(row.sno)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                  </svg>
+                  {selectedRow=== row.sno&&(
+                    <ActionMenu 
+                    onView={()=>handleView(row.sno)}
+                    onEdit={()=>handleEdit(row.sno)}
+                    onDelete={()=>handleDelete(row.sno)}
+                    />
+                  )
+                  }
+
+                </div>),
               ignoreClick: true,
               // right:true,
               width: '100px',
             },
-          ]} 
+          ]}
           data={pagination}
           responsive
           selectableRows
           fixedHeader
           highlightOnHover
-          customStyles={customStyles} 
-          className='text-wrap'>
+          customStyles={customStyles}
+          className='text-wrap w-full'>
         </DataTable>
       </div>
       <div className="py-2 lg:flex lg:justify-between items-center w-auto flex-row justify-center">

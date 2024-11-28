@@ -90,14 +90,18 @@ const CustomToolbar = (toolbar) => {
   };
 
   return (
-    <div className="lg:w-96 w-2/12 items-center">
+    <div className="lg:w-96 items-center">
       <div className="flex justify-between items-center mb-4">
         <button onClick={goToBack} className="px-2 py-2 bg-primary bg-opacity-20 rounded-full">
-          <IoIosArrowBack className="text-primary" size={25} />
+        <svg width="20" height="20" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.06 8L5 7.06L1.94667 4L5 0.94L4.06 8.21774e-08L0.0599996 4L4.06 8Z" fill="#d7b95f" />
+          </svg>
         </button>
         <span className="text-lg text-center font-semibold text-wrap">{label()}</span>
         <button onClick={goToNext} className="px-2 py-2 bg-primary bg-opacity-20 rounded-full">
-          <MdNavigateNext className="text-primary" size={25} />
+        <svg width="20" height="20" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.94 0L0 0.94L3.05333 4L0 7.06L0.94 8L4.94 4L0.94 0Z" fill="#d7b95f" />
+          </svg>
         </button>
       </div>
     </div>
@@ -219,9 +223,9 @@ const MyCalendar = () => {
         <input type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-48 w-full p-2.5" />
       </div>
 
-      <div className="max-w-full overflow-x-scroll scroll">
+      <div className="w-full overflow-x-scroll scroll">
         <Calendar
-        className='-z-50 lg:w-full w-screen'
+        className='-z-50 lg:w-full md:w-full sm:w-screen'
           localizer={localizer}
           events={filteredEvents}
           style={{ height: 800,width:'100%', margin: '20px' }}

@@ -135,7 +135,7 @@ const Consolidate=lazy(()=>import('./Pages/compliancefilling/Consolidate'));
 const CompanyCompliance=lazy(()=>import('./Pages/company/CompanyCompliance'));
 const Message=lazy(()=>import('./Pages/notification/Message'));
 const EditCompliance=lazy(()=>import('./Pages/compliance/EditCompliance'));
-import './index.css'
+lazy(()=>import('./index.css'))
 import Error from './Components/Error';
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
