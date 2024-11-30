@@ -69,7 +69,6 @@ const EditCompliance = () => {
       {
         imageUrl: "/src/Images/edit.png",
         imageHeight: 100,
-        imageHeight: 100,
         title: 'Edit',
         text: 'Do you Want to Edit the Compliance',
         showCancelButton: true,
