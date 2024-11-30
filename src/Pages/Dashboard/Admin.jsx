@@ -17,7 +17,7 @@ const Admin = () => {
     const [startDate, setStartDate] = useState(null);
     const contentRef = useRef(null);
 
-    const company = { totalCompany: 1567, state: 454, district: 219, branch: 53 };
+    const company = { totalCompany: 180, Active: 80, InActive: 90, branch: 53 };
     const complianceData = { complied: 60, notComplied: 20, partiallyComplied: 12, overdue: 8 };
     const totalPages = 10;
     const handleFilterChange = (newFilters) => {
@@ -82,8 +82,8 @@ const Admin = () => {
             <Dropdown onFilterChange={handleFilterChange} startDate={startDate} setStartDate={setStartDate} onDownloadClick={handleDownload}/>
             <ClientList
                 totalCompany={company.totalCompany}
-                state={company.state}
-                district={company.district}
+                Active={company.Active}
+                InActive={company.InActive}
                 branch={company.branch} />
                 <Status {...complianceData} />
 

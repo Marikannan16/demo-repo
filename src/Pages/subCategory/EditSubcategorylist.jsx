@@ -13,7 +13,7 @@ import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
 
-const ViewSubCategory = () => {
+const EditSubCategory = () => {
     const navigate = useNavigate()
     const [data] = useState(Data)
     // const [downMenu, setDownMenu] = useState(false)
@@ -199,9 +199,9 @@ const ViewSubCategory = () => {
     return (
         <div className='h-full p-5 shadow-lg'>
             <div className="flex items-center justify-between">
-                <h2 className='text-xl font-bold'>Create Sub Category</h2>
+                <h2 className='text-xl font-bold'>Edit Sub Category</h2>
                 <Link to="/subcatlist"><button className="w-36 py-1.5 bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
-                    Subcategory List
+                    SubCategory List
                 </button> </Link>
             </div>
             <form onSubmit={handleSubmit} className='py-10 flex flex-col gap-2 '>
@@ -430,4 +430,4 @@ const ViewSubCategory = () => {
     )
 }
 
-export default ViewSubCategory
+export default EditSubCategory

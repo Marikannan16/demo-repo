@@ -14,7 +14,7 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import CustomPagination from '../../Components/CustomPagination';
 import EditCompliances from '../../Components/compliancefilling/EditCompliances';
 import Flatpickr from "react-flatpickr";
-import "flatpickr/dist/themes/material_green.css";
+import "flatpickr/dist/themes/material_blue.css";
 import img from "../../Images/sky.jpg"
 import Dummy2 from "../../Components/compliancefilling/ScoreDummy";
 import ActionMenu from '../../Components/ActionMenu';

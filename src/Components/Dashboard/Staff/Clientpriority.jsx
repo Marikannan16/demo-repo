@@ -26,7 +26,7 @@ const Clientpriority = ({ low, medium, high }) => {
                                     <div className="p-1 rounded" style={{ backgroundColor: '#36b089' }}>
                                         <TbReportAnalytics style={{ color: 'white', fontSize: '30px' }} />
                                     </div>
-                                    <div className="ms-5 ps-2">
+                                    <div className="ms-5 ps-2 font-bold">
                                         <h5>Low</h5>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@ const Clientpriority = ({ low, medium, high }) => {
                                     <div className="p-1 rounded" style={{ backgroundColor: '#0d3d6e' }}>
                                         <TbReportAnalytics style={{ color: 'white', fontSize: '30px' }} />
                                     </div>
-                                    <div className="ms-2 ps-2">
+                                    <div className="ms-2 ps-2 font-bold">
                                         <h5>Medium</h5>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ const Clientpriority = ({ low, medium, high }) => {
                                     <div className="p-1 rounded" style={{ backgroundColor: '#ff1a1a' }}>
                                         <TbReportAnalytics style={{ color: 'white', fontSize: '30px' }} />
                                     </div>
-                                    <div className="ms-5 ps-2">
+                                    <div className="ms-5 ps-2 font-bold">
                                         <h5>High</h5>
                                     </div>
                                 </div>

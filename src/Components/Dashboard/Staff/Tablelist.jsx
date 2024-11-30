@@ -117,7 +117,7 @@ const TableList = ({ Dummy, filters, currentPage, onPageChange, itemsPerPage }) 
                                     <td className="px-2 sm:px-4 py-1 border-b border-bordergray">{row.Branch}</td>
                                     <td className="px-2 sm:px-4 py-1 border-b border-bordergray">{row.Activity}</td>
                                     <td className="px-2 sm:px-4 py-1 border-b border-bordergray">
-                                        <span className={`px-2 py-1 flex items-center justify-center w-32 h-8 text-sm font-semibold leading-tight rounded-full 
+                                        <span className={`px-2 py-1 flex items-center justify-center w-32 h-8 text-sm font-bold leading-tight rounded-full 
                     ${row.Status === 'Not Complied' ? 'bg-red-400' : row.Status === 'Partially Complied' ? 'bg-amber-500 ps-9' : row.Status === 'Complied' ? 'bg-green-400' : 'bg-gray-200'}`}>
                                             {row.Status}
                                         </span>

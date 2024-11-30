@@ -14,7 +14,7 @@ const ClientDash = () => {
     const contentRef = useRef(null);
 
 
-    const company = { totalCompany: 1, state: 43, district: 27, branch: 7 };
+    const company = {Active: 80, InActive: 90, district: 27, branch: 7 };
     const complianceData = { complied: 60, notComplied: 20, partiallyComplied: 12, overdue: 8 };
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -85,8 +85,8 @@ const ClientDash = () => {
         <div ref={contentRef} className="p-5">
             <Filter onFilterChange={handleFilterChange} startDate={startDate} setStartDate={setStartDate} onDownloadClick={handleDownload}/>
             <CompanyList
-                totalCompany={company.totalCompany}
-                state={company.state}
+                Active={company.Active}
+                InActive={company.InActive}
                 district={company.district}
                 branch={company.branch} />
 

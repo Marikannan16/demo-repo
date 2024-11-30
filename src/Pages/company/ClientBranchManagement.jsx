@@ -166,7 +166,7 @@ const ClientBranchManagement = () => {
                     data.pincode.toLowerCase().includes(search.toLowerCase()) ||
                     data.prioriy.toLowerCase().includes(search.toLowerCase())
                 )
-            );
+            );w
         });
         setfilterData(filtered);
     }, [Data, filter, search]);

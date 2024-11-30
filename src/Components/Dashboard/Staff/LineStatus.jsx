@@ -195,3 +195,4 @@ const LineStatus = ({ companies, filters, current, onPageChange, itemsPage }) =>
 };
 
 export default LineStatus;
+
